@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: MailerController</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">MailerController</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/app/controllers/mailer_controller_rb.html">
+                app/controllers/mailer_controller.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                <a href="ApplicationController.html">
+                ApplicationController
+               </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000025">availablebook</a>&nbsp;&nbsp;
+      <a href="#M000023">index</a>&nbsp;&nbsp;
+      <a href="#M000026">issuebook</a>&nbsp;&nbsp;
+      <a href="#M000027">newarrival</a>&nbsp;&nbsp;
+      <a href="#M000028">regmem</a>&nbsp;&nbsp;
+      <a href="#M000024">reserve</a>&nbsp;&nbsp;
+      <a href="#M000029">sendmail</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000025" class="method-detail">
+        <a name="M000025"></a>
+
+        <div class="method-heading">
+          <a href="#M000025" class="method-signature">
+          <span class="method-name">availablebook</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000025-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000025-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/mailer_controller.rb, line 36</span>
+36:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">availablebook</span>
+37:            <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;inside availablebook&quot;</span>
+38:            <span class="ruby-identifier">puts</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:bookid</span>]
+39:            
+40:                 <span class="ruby-ivar">@book</span> = <span class="ruby-constant">Book</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:first</span>,
+41:                                                           <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;BookID = #{params[:bookid]}&quot;</span>)
+42:           <span class="ruby-identifier">puts</span> <span class="ruby-ivar">@mem_id</span>=<span class="ruby-ivar">@book</span>.<span class="ruby-identifier">mem_id</span>                                             
+43:                 <span class="ruby-ivar">@member</span> = <span class="ruby-constant">Member</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:first</span>,
+44:                                                                         <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;MemberID = #{@mem_id}&quot;</span>)
+45:                 <span class="ruby-identifier">puts</span> <span class="ruby-ivar">@mail_id</span> = <span class="ruby-ivar">@member</span>.<span class="ruby-constant">Email</span>
+46:                 <span class="ruby-ivar">@sub</span> = <span class="ruby-value str">&quot;Availability Of Reseved Book&quot;</span>
+47:                 <span class="ruby-ivar">@message</span> = <span class="ruby-value str">&quot;This is a notification that your reserved book is now Available in Library, So if You want you can Issue it.&quot;</span>
+48:            
+49:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000023" class="method-detail">
+        <a name="M000023"></a>
+
+        <div class="method-heading">
+          <a href="#M000023" class="method-signature">
+          <span class="method-name">index</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000023-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000023-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/mailer_controller.rb, line 3</span>
+ 3:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span>
+ 4:     <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;in index..&quot;</span>
+ 5:     <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;~~~~~~~~ #{params[:id]} ~~~~~~~~~~~~~~&quot;</span>
+ 6:     <span class="ruby-ivar">@mail_id</span> = <span class="ruby-constant">Member</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:first</span>, <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;MemberID = #{params[:id]}&quot;</span>)
+ 7:     <span class="ruby-identifier">puts</span> <span class="ruby-ivar">@mail_id1</span>=<span class="ruby-ivar">@mail_id</span>.<span class="ruby-constant">Email</span>
+ 8:     <span class="ruby-ivar">@sub</span> = <span class="ruby-value str">&quot;Alert regarding Return Book &quot;</span>
+ 9:     <span class="ruby-ivar">@message</span> = <span class="ruby-value str">&quot;This is a notification that your issued book's (Date of Return) is whithin next two Day.&quot;</span>
+10:         <span class="ruby-comment cmt"># render :file =&gt; 'app\views\mailer\index.html.erb'</span>
+11:          
+12:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000026" class="method-detail">
+        <a name="M000026"></a>
+
+        <div class="method-heading">
+          <a href="#M000026" class="method-signature">
+          <span class="method-name">issuebook</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000026-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000026-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/mailer_controller.rb, line 51</span>
+51:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">issuebook</span>
+52:     <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;inside issuebook&quot;</span>
+53:     
+54:     
+55:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000027" class="method-detail">
+        <a name="M000027"></a>
+
+        <div class="method-heading">
+          <a href="#M000027" class="method-signature">
+          <span class="method-name">newarrival</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000027-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000027-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/mailer_controller.rb, line 57</span>
+57:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">newarrival</span>
+58:             
+59:             <span class="ruby-comment cmt">#@group=Cluster.find(:all, :order =&gt; &quot;ClusterName&quot;)</span>
+60:         
+61:        <span class="ruby-comment cmt"># for item in @group</span>
+62:          <span class="ruby-comment cmt">#   @clustarray&lt;&lt; item.ClusterName</span>
+63:         <span class="ruby-comment cmt">#end</span>
+64:         <span class="ruby-comment cmt">#len=@clustarray.length </span>
+65:            
+66:                 <span class="ruby-ivar">@mem</span> = <span class="ruby-constant">Member</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:all</span>, <span class="ruby-identifier">:order</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;name&quot;</span>)
+67:                 <span class="ruby-ivar">@mail_id</span>=[]
+68:                 
+69:                 <span class="ruby-ivar">@mem</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span>
+70:                         <span class="ruby-ivar">@mail_id</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">item</span>.<span class="ruby-constant">Email</span>
+71:                 <span class="ruby-keyword kw">end</span>
+72:                 
+73:                 <span class="ruby-identifier">puts</span> <span class="ruby-ivar">@mail_id</span>
+74:                 
+75:                 
+76:                 <span class="ruby-identifier">len</span>=<span class="ruby-ivar">@mem</span>.<span class="ruby-identifier">length</span> 
+77:                 <span class="ruby-ivar">@mail_arry</span>=[] 
+78: 
+79:                 <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword kw">in</span> <span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">len</span><span class="ruby-operator">-</span><span class="ruby-value">1</span> <span class="ruby-keyword kw">do</span>
+80:                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">i</span><span class="ruby-operator">==</span><span class="ruby-identifier">len</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>
+81:                                         <span class="ruby-ivar">@mail_arry</span><span class="ruby-operator">&lt;&lt;</span><span class="ruby-ivar">@mail_id</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">to_s</span>
+82:                         <span class="ruby-keyword kw">else</span> 
+83:                                         <span class="ruby-ivar">@mail_arry</span><span class="ruby-operator">&lt;&lt;</span><span class="ruby-ivar">@mail_id</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">to_s</span>
+84:                                         <span class="ruby-ivar">@mail_arry</span><span class="ruby-operator">&lt;&lt;</span><span class="ruby-value str">','</span> 
+85:                         <span class="ruby-keyword kw">end</span> 
+86:                 <span class="ruby-keyword kw">end</span> 
+87:                 
+88:                 <span class="ruby-identifier">puts</span> <span class="ruby-ivar">@mail_arry</span>
+89:                 
+90:                 
+91:                 <span class="ruby-ivar">@sub</span> = <span class="ruby-value str">&quot;Notification Of New Arrival of Books&quot;</span>
+92:                 <span class="ruby-ivar">@message</span> = <span class="ruby-value str">&quot;This is a notification that there are some new books arrived in library.&quot;</span>
+93:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000028" class="method-detail">
+        <a name="M000028"></a>
+
+        <div class="method-heading">
+          <a href="#M000028" class="method-signature">
+          <span class="method-name">regmem</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000028-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000028-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/controllers/mailer_controller.rb, line 95</span>
+ 95:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">regmem</span>
+ 96:                 <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;in regmem&quot;</span>
+ 97:                 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:memname</span>]
+ 98:                 <span class="ruby-ivar">@mem</span> = <span class="ruby-constant">Member</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:first</span>,
+ 99:                                                                 <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;name = '#{params[:memname]}'&quot;</span>)
+100:                 <span class="ruby-identifier">puts</span> <span class="ruby-ivar">@mem</span>.<span class="ruby-constant">MemberID</span>
+101:                 <span class="ruby-ivar">@mem</span>.<span class="ruby-identifier">update_attribute</span>( <span class="ruby-identifier">:Reqflag</span>,  <span class="ruby-value str">'Y'</span>) 
+102:                 <span class="ruby-ivar">@mail_id</span> = <span class="ruby-ivar">@mem</span>.<span class="ruby-constant">Email</span>
+103:                 
+104:                 <span class="ruby-ivar">@sub</span> = <span class="ruby-value str">&quot;Notification Of Activation of MemberShip&quot;</span>
+105:                 
+106:                 <span class="ruby-ivar">@message</span> = <span class="ruby-value str">&quot;This is a notification that Your MemberShip for OnLine Library System has been Acivated.&quot;</span>
+107:                 
+108:                 <span class="ruby-identifier">p</span> <span class="ruby-value str">&quot;.....................&quot;</span>
+109:                 
+110:                 <span class="ruby-comment cmt">#@u=Member.find_by_sql(&quot;      update members set reqflag='Y' where name='#{params[:memname]}'&quot;)</span>
+111: 
+112:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000024" class="method-detail">
+        <a name="M000024"></a>
+
+        <div class="method-heading">
+          <a href="#M000024" class="method-signature">
+          <span class="method-name">reserve</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000024-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000024-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/mailer_controller.rb, line 14</span>
+14:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reserve</span>
+15:                 <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;in index1..&quot;</span>
+16:                 
+17:                 <span class="ruby-ivar">@mem</span> = <span class="ruby-constant">Member</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:first</span>,
+18:                                                                 <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span><span class="ruby-value str">&quot; usertype = 'Admin'&quot;</span>)
+19:                 <span class="ruby-identifier">puts</span> <span class="ruby-ivar">@mail_id</span>=<span class="ruby-ivar">@mem</span>.<span class="ruby-constant">Email</span>                                                      
+20:                 <span class="ruby-identifier">p</span> <span class="ruby-value str">&quot;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~&quot;</span>
+21:                 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:bookid</span>]
+22:                 <span class="ruby-identifier">p</span> <span class="ruby-value str">&quot;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~&quot;</span>
+23:     
+24:     <span class="ruby-ivar">@book</span> = <span class="ruby-constant">Book</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:first</span>, <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;BookID = #{params[:bookid]}&quot;</span>)
+25:     
+26:         <span class="ruby-ivar">@mail_id</span> = <span class="ruby-value str">&quot;rahul@sprylogic.com&quot;</span>
+27:         <span class="ruby-ivar">@sub</span> = <span class="ruby-value str">&quot;Reseve the Book&quot;</span>
+28:         <span class="ruby-ivar">@message</span> = <span class="ruby-node">&quot;Please Kindly Reserve this Book for me, and give alert when it is available in Library.
+29:                                         Book details are as follow :
+30:                                         BOOKID:=#{@book.BookID}\n\tSUBJECT:=#{@book.Subject}\n\tTITLE:=#{@book.Title}\n\tAUTHOR:=#{@book.Author}\n\tEDITION:=#{@book.Edition}&quot;</span>
+31:                                         
+32:          
+33:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000029" class="method-detail">
+        <a name="M000029"></a>
+
+        <div class="method-heading">
+          <a href="#M000029" class="method-signature">
+          <span class="method-name">sendmail</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000029-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000029-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/controllers/mailer_controller.rb, line 117</span>
+117:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sendmail</span>
+118:     <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;in sendmail..&quot;</span>
+119:          <span class="ruby-identifier">recipient</span> = <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:email</span>][<span class="ruby-identifier">:recipient</span>]
+120:          
+121:          <span class="ruby-identifier">subject</span> = <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:email</span>][<span class="ruby-identifier">:subject</span>]
+122:          <span class="ruby-identifier">message</span> = <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:email</span>][<span class="ruby-identifier">:message</span>]
+123:          <span class="ruby-identifier">puts</span> <span class="ruby-identifier">recipient</span>
+124:          <span class="ruby-identifier">puts</span>  <span class="ruby-identifier">subject</span> 
+125:          <span class="ruby-identifier">puts</span> <span class="ruby-identifier">message</span>
+126:          
+127:          <span class="ruby-keyword kw">begin</span>
+128:                 <span class="ruby-constant">Mailer</span>.<span class="ruby-identifier">deliver_contact</span>(<span class="ruby-identifier">recipient</span>, <span class="ruby-identifier">subject</span>, <span class="ruby-identifier">message</span>)
+129:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">xhr?</span>
+130:                 <span class="ruby-comment cmt">#render :text =&gt; 'Message sent successfully'</span>
+131:     <span class="ruby-comment cmt">#page.alert &quot;Mail sent successfully&quot;</span>
+132:     <span class="ruby-comment cmt">#session[:msg]=&quot;Mail sent Successfully...&quot;</span>
+133:     <span class="ruby-identifier">flash</span>[<span class="ruby-identifier">:notice1</span>]=<span class="ruby-value str">&quot;Mail sent Successfully...&quot;</span>
+134:     <span class="ruby-comment cmt">#render :action =&gt; index</span>
+135:             <span class="ruby-comment cmt"># page.alert &quot;Mail sent successfully&quot;</span>
+136:          <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Exception</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+137:            <span class="ruby-identifier">puts</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">message</span>
+138:          <span class="ruby-keyword kw">end</span>
+139:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

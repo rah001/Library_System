@@ -1,0 +1,11 @@
+class BorrowsController < ApplicationController
+  def index
+  end
+
+  def borrow
+  end
+
+  def show
+  end
+
+end

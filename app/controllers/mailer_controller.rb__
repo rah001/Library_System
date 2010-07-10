@@ -1,0 +1,33 @@
+class MailerController < ApplicationController
+  layout 'design'
+  def index
+    puts "in index.."
+    puts "~~~~~~~~ #{params[:id]} ~~~~~~~~~~~~~~"
+    @mail_id = Member.find(:first, :conditions => "MemberID = #{params[:id]}")
+    puts @mail_id1=@mail_id.Email
+      render :file => 'app\views\mailer\index.html.erb'
+      
+  end
+
+  def sendmail
+    puts "in sendmail.."
+      recipient = params[:email][:recipient]
+      
+      subject = params[:email][:subject]
+      message = params[:email][:message]
+      puts recipient
+      puts  subject 
+      puts message
+      
+      begin
+          Mailer.deliver_contact(recipient, subject, message)
+          return if request.xhr?
+          render :text => 'Message sent successfully'
+      rescue Exception => e
+        puts e.message
+      end
+  end
+
+end
+
+
